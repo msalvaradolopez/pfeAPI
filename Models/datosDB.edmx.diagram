@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="71d9dde1e3ba41eb98ce0ccb35985a40" Name="Diagram1" ZoomLevel="92">
+        <EntityTypeShape EntityType="dbQuantusModel.pfeEMPRESA" Width="1.5" PointX="0.75" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbQuantusModel.pfeFACTURAS" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbQuantusModel.pfeFACTURASDET" Width="1.5" PointX="5.25" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbQuantusModel.pfeFILIALES" Width="1.5" PointX="5.25" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbQuantusModel.pfeORDENCOMPRA" Width="1.5" PointX="10.5" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbQuantusModel.pfePARAMETROS" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbQuantusModel.pfePROVEEDORES" Width="1.5" PointX="8.25" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbQuantusModel.pfeUSUARIOS" Width="1.5" PointX="3" PointY="29.75" IsExpanded="true" />
+        <AssociationConnector Association="dbQuantusModel.FK_pfeFACTURAS_pfeEMPRESA" ManuallyRouted="false" />
+        <AssociationConnector Association="dbQuantusModel.FK_pfeFILIALES_pfeEMPRESA" ManuallyRouted="false" />
+        <AssociationConnector Association="dbQuantusModel.FK_pfeORDENCOMPRA_pfeEMPRESA" ManuallyRouted="false" />
+        <AssociationConnector Association="dbQuantusModel.FK_pfePROVEEDORES_pfeEMPRESA" ManuallyRouted="false" />
+        <AssociationConnector Association="dbQuantusModel.FK_pfeUSUARIOS_pfeEMPRESA" ManuallyRouted="false" />
+        <AssociationConnector Association="dbQuantusModel.FK_pfeFACTURAS_pfeFILIAL" ManuallyRouted="false" />
+        <AssociationConnector Association="dbQuantusModel.FK_pfeFACTURAS_pfeORDENCOMPRA" ManuallyRouted="false" />
+        <AssociationConnector Association="dbQuantusModel.FK_pfeFACTURAS_pfePROVEEDOR" ManuallyRouted="false" />
+        <AssociationConnector Association="dbQuantusModel.FK_pfeFACTURASDET_pfeFACTURAS" ManuallyRouted="false" />
+        <AssociationConnector Association="dbQuantusModel.FK_pfeFILIALES_pfeUSUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="dbQuantusModel.FK_pfeORDENCOMPRA_pfeFILIAL" ManuallyRouted="false" />
+        <AssociationConnector Association="dbQuantusModel.FK_pfeORDENCOMPRA_pfePROVEEDOR" ManuallyRouted="false" />
+        <AssociationConnector Association="dbQuantusModel.FK_pfeORDENCOMPRA_pfeUSUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="dbQuantusModel.FK_pfePROVEEDORES_pfeUSUARIO" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

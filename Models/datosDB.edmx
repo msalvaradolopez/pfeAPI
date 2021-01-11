@@ -1,0 +1,994 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="dbQuantusModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="pfeEMPRESA">
+          <Key>
+            <PropertyRef Name="IDEMPRESA" />
+          </Key>
+          <Property Name="IDEMPRESA" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="RAZONSOCIAL" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="NOMCONTACTO" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="EMAILCONTACTO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TELEFONO" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ESTATUS" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="RFC" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="pfeFACTURAS">
+          <Key>
+            <PropertyRef Name="IDFACTURA" />
+            <PropertyRef Name="IDEMPRESA" />
+          </Key>
+          <Property Name="IDFACTURA" Type="numeric" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDEMPRESA" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="IDFILIAL" Type="numeric" Precision="2" Scale="0" Nullable="false" />
+          <Property Name="IDPROVEEDOR" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="IDFOLIOOC" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="XMLTXT" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="XMLOBJ" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="XMLFILENAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PDFOBJ" Type="nvarchar(max)" />
+          <Property Name="PDFFILENAME" Type="varchar" MaxLength="50" />
+          <Property Name="SERIE" Type="varchar" MaxLength="5" />
+          <Property Name="FOLIO" Type="varchar" MaxLength="10" />
+          <Property Name="FECHA" Type="date" Nullable="false" />
+          <Property Name="TOTAL" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="MONEDA" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="UUID" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="ESTATUS" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="COMENTARIO" Type="varchar" MaxLength="100" />
+          <Property Name="IMGOBJ" Type="nvarchar(max)" />
+          <Property Name="IMGFILENAME" Type="varchar" MaxLength="50" />
+          <Property Name="TIPOCOMPROBANTE" Type="char" MaxLength="1" />
+          <Property Name="FECHAINGRESOXML" Type="datetime" />
+          <Property Name="FECHAINGRESOPDF" Type="datetime" />
+          <Property Name="FECHAINGRESOIMG" Type="datetime" />
+          <Property Name="FECHAESTATUS" Type="datetime" />
+        </EntityType>
+        <EntityType Name="pfeFACTURASDET">
+          <Key>
+            <PropertyRef Name="IDFACTURADET" />
+            <PropertyRef Name="IDFACTURA" />
+            <PropertyRef Name="IDEMPRESA" />
+          </Key>
+          <Property Name="IDFACTURADET" Type="numeric" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDFACTURA" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="IDEMPRESA" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="CLAVEUNIDAD" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CANTIDAD" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="VALORUNITARIO" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="IMPORTE" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="pfeFILIALES">
+          <Key>
+            <PropertyRef Name="IDEMPRESA" />
+            <PropertyRef Name="IDFILIAL" />
+          </Key>
+          <Property Name="IDEMPRESA" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="IDFILIAL" Type="numeric" Precision="2" Scale="0" Nullable="false" />
+          <Property Name="RAZONSOCIAL" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="RFC" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="EMAILREVISION" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EMAILPAGOS" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EMAILCONTACTO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TELEFONO" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="IDUSUARIO" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="pfeORDENCOMPRA">
+          <Key>
+            <PropertyRef Name="IDEMPRESA" />
+            <PropertyRef Name="IDFILIAL" />
+            <PropertyRef Name="IDPROVEEDOR" />
+            <PropertyRef Name="IDFOLIOOC" />
+          </Key>
+          <Property Name="IDEMPRESA" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="IDFILIAL" Type="numeric" Precision="2" Scale="0" Nullable="false" />
+          <Property Name="IDPROVEEDOR" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="IDFOLIOOC" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="FECHAOC" Type="date" Nullable="false" />
+          <Property Name="OBRA" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="COSTO" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="MONEDA" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="ESTATUS" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="COMENTARIO" Type="varchar" MaxLength="100" />
+          <Property Name="IDUSUARIO" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="pfePARAMETROS">
+          <Key>
+            <PropertyRef Name="IDPARAMETRO" />
+          </Key>
+          <Property Name="IDPARAMETRO" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="VALOR" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="pfePROVEEDORES">
+          <Key>
+            <PropertyRef Name="IDEMPRESA" />
+            <PropertyRef Name="IDPROVEEDOR" />
+          </Key>
+          <Property Name="IDEMPRESA" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="IDPROVEEDOR" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="RAZONSOCIAL" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="TIPOPROV" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="CURP" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="RFC" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="TIPOPAGO" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="DIASCREDITO" Type="numeric" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="TIPOFACTURA" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="TIPOVENCE" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="CLAVEPROV" Type="varchar" MaxLength="20" />
+          <Property Name="CLAVEPROD" Type="varchar" MaxLength="20" />
+          <Property Name="NOMCONTACTO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="APPCONTACTO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="APMCONTACTO" Type="varchar" MaxLength="50" />
+          <Property Name="EMAILPROV" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TELEFONO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IDUSUARIO" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="IDMODIFICA" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ESTATUS" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="pfeUSUARIOS">
+          <Key>
+            <PropertyRef Name="IDEMPRESA" />
+            <PropertyRef Name="IDUSUARIO" />
+          </Key>
+          <Property Name="IDEMPRESA" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="IDUSUARIO" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="PASSW" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="NOMUSUARIO" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ROL" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="ESTATUS" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_pfeFACTURAS_pfeEMPRESA">
+          <End Role="pfeEMPRESA" Type="Self.pfeEMPRESA" Multiplicity="1" />
+          <End Role="pfeFACTURAS" Type="Self.pfeFACTURAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pfeEMPRESA">
+              <PropertyRef Name="IDEMPRESA" />
+            </Principal>
+            <Dependent Role="pfeFACTURAS">
+              <PropertyRef Name="IDEMPRESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pfeFACTURAS_pfeFILIAL">
+          <End Role="pfeFILIALES" Type="Self.pfeFILIALES" Multiplicity="1" />
+          <End Role="pfeFACTURAS" Type="Self.pfeFACTURAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pfeFILIALES">
+              <PropertyRef Name="IDEMPRESA" />
+              <PropertyRef Name="IDFILIAL" />
+            </Principal>
+            <Dependent Role="pfeFACTURAS">
+              <PropertyRef Name="IDEMPRESA" />
+              <PropertyRef Name="IDFILIAL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pfeFACTURAS_pfeORDENCOMPRA">
+          <End Role="pfeORDENCOMPRA" Type="Self.pfeORDENCOMPRA" Multiplicity="1" />
+          <End Role="pfeFACTURAS" Type="Self.pfeFACTURAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pfeORDENCOMPRA">
+              <PropertyRef Name="IDEMPRESA" />
+              <PropertyRef Name="IDFILIAL" />
+              <PropertyRef Name="IDPROVEEDOR" />
+              <PropertyRef Name="IDFOLIOOC" />
+            </Principal>
+            <Dependent Role="pfeFACTURAS">
+              <PropertyRef Name="IDEMPRESA" />
+              <PropertyRef Name="IDFILIAL" />
+              <PropertyRef Name="IDPROVEEDOR" />
+              <PropertyRef Name="IDFOLIOOC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pfeFACTURAS_pfePROVEEDOR">
+          <End Role="pfePROVEEDORES" Type="Self.pfePROVEEDORES" Multiplicity="1" />
+          <End Role="pfeFACTURAS" Type="Self.pfeFACTURAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pfePROVEEDORES">
+              <PropertyRef Name="IDEMPRESA" />
+              <PropertyRef Name="IDPROVEEDOR" />
+            </Principal>
+            <Dependent Role="pfeFACTURAS">
+              <PropertyRef Name="IDEMPRESA" />
+              <PropertyRef Name="IDPROVEEDOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pfeFACTURASDET_pfeFACTURAS">
+          <End Role="pfeFACTURAS" Type="Self.pfeFACTURAS" Multiplicity="1" />
+          <End Role="pfeFACTURASDET" Type="Self.pfeFACTURASDET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pfeFACTURAS">
+              <PropertyRef Name="IDEMPRESA" />
+              <PropertyRef Name="IDFACTURA" />
+            </Principal>
+            <Dependent Role="pfeFACTURASDET">
+              <PropertyRef Name="IDEMPRESA" />
+              <PropertyRef Name="IDFACTURA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pfeFILIALES_pfeEMPRESA">
+          <End Role="pfeEMPRESA" Type="Self.pfeEMPRESA" Multiplicity="1" />
+          <End Role="pfeFILIALES" Type="Self.pfeFILIALES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pfeEMPRESA">
+              <PropertyRef Name="IDEMPRESA" />
+            </Principal>
+            <Dependent Role="pfeFILIALES">
+              <PropertyRef Name="IDEMPRESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pfeFILIALES_pfeUSUARIO">
+          <End Role="pfeUSUARIOS" Type="Self.pfeUSUARIOS" Multiplicity="1" />
+          <End Role="pfeFILIALES" Type="Self.pfeFILIALES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pfeUSUARIOS">
+              <PropertyRef Name="IDEMPRESA" />
+              <PropertyRef Name="IDUSUARIO" />
+            </Principal>
+            <Dependent Role="pfeFILIALES">
+              <PropertyRef Name="IDEMPRESA" />
+              <PropertyRef Name="IDUSUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pfeORDENCOMPRA_pfeEMPRESA">
+          <End Role="pfeEMPRESA" Type="Self.pfeEMPRESA" Multiplicity="1" />
+          <End Role="pfeORDENCOMPRA" Type="Self.pfeORDENCOMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pfeEMPRESA">
+              <PropertyRef Name="IDEMPRESA" />
+            </Principal>
+            <Dependent Role="pfeORDENCOMPRA">
+              <PropertyRef Name="IDEMPRESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pfeORDENCOMPRA_pfeFILIAL">
+          <End Role="pfeFILIALES" Type="Self.pfeFILIALES" Multiplicity="1" />
+          <End Role="pfeORDENCOMPRA" Type="Self.pfeORDENCOMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pfeFILIALES">
+              <PropertyRef Name="IDEMPRESA" />
+              <PropertyRef Name="IDFILIAL" />
+            </Principal>
+            <Dependent Role="pfeORDENCOMPRA">
+              <PropertyRef Name="IDEMPRESA" />
+              <PropertyRef Name="IDFILIAL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pfeORDENCOMPRA_pfePROVEEDOR">
+          <End Role="pfePROVEEDORES" Type="Self.pfePROVEEDORES" Multiplicity="1" />
+          <End Role="pfeORDENCOMPRA" Type="Self.pfeORDENCOMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pfePROVEEDORES">
+              <PropertyRef Name="IDEMPRESA" />
+              <PropertyRef Name="IDPROVEEDOR" />
+            </Principal>
+            <Dependent Role="pfeORDENCOMPRA">
+              <PropertyRef Name="IDEMPRESA" />
+              <PropertyRef Name="IDPROVEEDOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pfeORDENCOMPRA_pfeUSUARIO">
+          <End Role="pfeUSUARIOS" Type="Self.pfeUSUARIOS" Multiplicity="1" />
+          <End Role="pfeORDENCOMPRA" Type="Self.pfeORDENCOMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pfeUSUARIOS">
+              <PropertyRef Name="IDEMPRESA" />
+              <PropertyRef Name="IDUSUARIO" />
+            </Principal>
+            <Dependent Role="pfeORDENCOMPRA">
+              <PropertyRef Name="IDEMPRESA" />
+              <PropertyRef Name="IDUSUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pfePROVEEDORES_pfeEMPRESA">
+          <End Role="pfeEMPRESA" Type="Self.pfeEMPRESA" Multiplicity="1" />
+          <End Role="pfePROVEEDORES" Type="Self.pfePROVEEDORES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pfeEMPRESA">
+              <PropertyRef Name="IDEMPRESA" />
+            </Principal>
+            <Dependent Role="pfePROVEEDORES">
+              <PropertyRef Name="IDEMPRESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pfePROVEEDORES_pfeUSUARIO">
+          <End Role="pfeUSUARIOS" Type="Self.pfeUSUARIOS" Multiplicity="1" />
+          <End Role="pfePROVEEDORES" Type="Self.pfePROVEEDORES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pfeUSUARIOS">
+              <PropertyRef Name="IDEMPRESA" />
+              <PropertyRef Name="IDUSUARIO" />
+            </Principal>
+            <Dependent Role="pfePROVEEDORES">
+              <PropertyRef Name="IDEMPRESA" />
+              <PropertyRef Name="IDMODIFICA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pfeUSUARIOS_pfeEMPRESA">
+          <End Role="pfeEMPRESA" Type="Self.pfeEMPRESA" Multiplicity="1" />
+          <End Role="pfeUSUARIOS" Type="Self.pfeUSUARIOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pfeEMPRESA">
+              <PropertyRef Name="IDEMPRESA" />
+            </Principal>
+            <Dependent Role="pfeUSUARIOS">
+              <PropertyRef Name="IDEMPRESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbQuantusModelStoreContainer">
+          <EntitySet Name="pfeEMPRESA" EntityType="Self.pfeEMPRESA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pfeFACTURAS" EntityType="Self.pfeFACTURAS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pfeFACTURASDET" EntityType="Self.pfeFACTURASDET" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pfeFILIALES" EntityType="Self.pfeFILIALES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pfeORDENCOMPRA" EntityType="Self.pfeORDENCOMPRA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pfePARAMETROS" EntityType="Self.pfePARAMETROS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pfePROVEEDORES" EntityType="Self.pfePROVEEDORES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pfeUSUARIOS" EntityType="Self.pfeUSUARIOS" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_pfeFACTURAS_pfeEMPRESA" Association="Self.FK_pfeFACTURAS_pfeEMPRESA">
+            <End Role="pfeEMPRESA" EntitySet="pfeEMPRESA" />
+            <End Role="pfeFACTURAS" EntitySet="pfeFACTURAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pfeFACTURAS_pfeFILIAL" Association="Self.FK_pfeFACTURAS_pfeFILIAL">
+            <End Role="pfeFILIALES" EntitySet="pfeFILIALES" />
+            <End Role="pfeFACTURAS" EntitySet="pfeFACTURAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pfeFACTURAS_pfeORDENCOMPRA" Association="Self.FK_pfeFACTURAS_pfeORDENCOMPRA">
+            <End Role="pfeORDENCOMPRA" EntitySet="pfeORDENCOMPRA" />
+            <End Role="pfeFACTURAS" EntitySet="pfeFACTURAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pfeFACTURAS_pfePROVEEDOR" Association="Self.FK_pfeFACTURAS_pfePROVEEDOR">
+            <End Role="pfePROVEEDORES" EntitySet="pfePROVEEDORES" />
+            <End Role="pfeFACTURAS" EntitySet="pfeFACTURAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pfeFACTURASDET_pfeFACTURAS" Association="Self.FK_pfeFACTURASDET_pfeFACTURAS">
+            <End Role="pfeFACTURAS" EntitySet="pfeFACTURAS" />
+            <End Role="pfeFACTURASDET" EntitySet="pfeFACTURASDET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pfeFILIALES_pfeEMPRESA" Association="Self.FK_pfeFILIALES_pfeEMPRESA">
+            <End Role="pfeEMPRESA" EntitySet="pfeEMPRESA" />
+            <End Role="pfeFILIALES" EntitySet="pfeFILIALES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pfeFILIALES_pfeUSUARIO" Association="Self.FK_pfeFILIALES_pfeUSUARIO">
+            <End Role="pfeUSUARIOS" EntitySet="pfeUSUARIOS" />
+            <End Role="pfeFILIALES" EntitySet="pfeFILIALES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pfeORDENCOMPRA_pfeEMPRESA" Association="Self.FK_pfeORDENCOMPRA_pfeEMPRESA">
+            <End Role="pfeEMPRESA" EntitySet="pfeEMPRESA" />
+            <End Role="pfeORDENCOMPRA" EntitySet="pfeORDENCOMPRA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pfeORDENCOMPRA_pfeFILIAL" Association="Self.FK_pfeORDENCOMPRA_pfeFILIAL">
+            <End Role="pfeFILIALES" EntitySet="pfeFILIALES" />
+            <End Role="pfeORDENCOMPRA" EntitySet="pfeORDENCOMPRA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pfeORDENCOMPRA_pfePROVEEDOR" Association="Self.FK_pfeORDENCOMPRA_pfePROVEEDOR">
+            <End Role="pfePROVEEDORES" EntitySet="pfePROVEEDORES" />
+            <End Role="pfeORDENCOMPRA" EntitySet="pfeORDENCOMPRA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pfeORDENCOMPRA_pfeUSUARIO" Association="Self.FK_pfeORDENCOMPRA_pfeUSUARIO">
+            <End Role="pfeUSUARIOS" EntitySet="pfeUSUARIOS" />
+            <End Role="pfeORDENCOMPRA" EntitySet="pfeORDENCOMPRA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pfePROVEEDORES_pfeEMPRESA" Association="Self.FK_pfePROVEEDORES_pfeEMPRESA">
+            <End Role="pfeEMPRESA" EntitySet="pfeEMPRESA" />
+            <End Role="pfePROVEEDORES" EntitySet="pfePROVEEDORES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pfePROVEEDORES_pfeUSUARIO" Association="Self.FK_pfePROVEEDORES_pfeUSUARIO">
+            <End Role="pfeUSUARIOS" EntitySet="pfeUSUARIOS" />
+            <End Role="pfePROVEEDORES" EntitySet="pfePROVEEDORES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pfeUSUARIOS_pfeEMPRESA" Association="Self.FK_pfeUSUARIOS_pfeEMPRESA">
+            <End Role="pfeEMPRESA" EntitySet="pfeEMPRESA" />
+            <End Role="pfeUSUARIOS" EntitySet="pfeUSUARIOS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbQuantusModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="pfeEMPRESA">
+          <Key>
+            <PropertyRef Name="IDEMPRESA" />
+          </Key>
+          <Property Name="IDEMPRESA" Type="Decimal" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="RAZONSOCIAL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOMCONTACTO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EMAILCONTACTO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TELEFONO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ESTATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="pfeFACTURAS" Relationship="Self.FK_pfeFACTURAS_pfeEMPRESA" FromRole="pfeEMPRESA" ToRole="pfeFACTURAS" />
+          <NavigationProperty Name="pfeFILIALES" Relationship="Self.FK_pfeFILIALES_pfeEMPRESA" FromRole="pfeEMPRESA" ToRole="pfeFILIALES" />
+          <NavigationProperty Name="pfeORDENCOMPRA" Relationship="Self.FK_pfeORDENCOMPRA_pfeEMPRESA" FromRole="pfeEMPRESA" ToRole="pfeORDENCOMPRA" />
+          <NavigationProperty Name="pfePROVEEDORES" Relationship="Self.FK_pfePROVEEDORES_pfeEMPRESA" FromRole="pfeEMPRESA" ToRole="pfePROVEEDORES" />
+          <NavigationProperty Name="pfeUSUARIOS" Relationship="Self.FK_pfeUSUARIOS_pfeEMPRESA" FromRole="pfeEMPRESA" ToRole="pfeUSUARIOS" />
+          <Property Name="RFC" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="pfeFACTURAS">
+          <Key>
+            <PropertyRef Name="IDFACTURA" />
+            <PropertyRef Name="IDEMPRESA" />
+          </Key>
+          <Property Name="IDFACTURA" Type="Decimal" Precision="8" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDEMPRESA" Type="Decimal" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="IDFILIAL" Type="Decimal" Precision="2" Scale="0" Nullable="false" />
+          <Property Name="IDPROVEEDOR" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IDFOLIOOC" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="XMLTXT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="XMLOBJ" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="XMLFILENAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PDFOBJ" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PDFFILENAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SERIE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="FOLIO" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TOTAL" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="MONEDA" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UUID" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ESTATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="COMENTARIO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IMGOBJ" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IMGFILENAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TIPOCOMPROBANTE" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="FECHAINGRESOXML" Type="DateTime" Precision="3" />
+          <Property Name="FECHAINGRESOPDF" Type="DateTime" Precision="3" />
+          <Property Name="FECHAINGRESOIMG" Type="DateTime" Precision="3" />
+          <Property Name="FECHAESTATUS" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="pfeEMPRESA" Relationship="Self.FK_pfeFACTURAS_pfeEMPRESA" FromRole="pfeFACTURAS" ToRole="pfeEMPRESA" />
+          <NavigationProperty Name="pfeFILIALES" Relationship="Self.FK_pfeFACTURAS_pfeFILIAL" FromRole="pfeFACTURAS" ToRole="pfeFILIALES" />
+          <NavigationProperty Name="pfeORDENCOMPRA" Relationship="Self.FK_pfeFACTURAS_pfeORDENCOMPRA" FromRole="pfeFACTURAS" ToRole="pfeORDENCOMPRA" />
+          <NavigationProperty Name="pfePROVEEDORES" Relationship="Self.FK_pfeFACTURAS_pfePROVEEDOR" FromRole="pfeFACTURAS" ToRole="pfePROVEEDORES" />
+          <NavigationProperty Name="pfeFACTURASDET" Relationship="Self.FK_pfeFACTURASDET_pfeFACTURAS" FromRole="pfeFACTURAS" ToRole="pfeFACTURASDET" />
+        </EntityType>
+        <EntityType Name="pfeFACTURASDET">
+          <Key>
+            <PropertyRef Name="IDFACTURADET" />
+            <PropertyRef Name="IDFACTURA" />
+            <PropertyRef Name="IDEMPRESA" />
+          </Key>
+          <Property Name="IDFACTURADET" Type="Decimal" Precision="8" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDFACTURA" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="IDEMPRESA" Type="Decimal" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="CLAVEUNIDAD" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CANTIDAD" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VALORUNITARIO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IMPORTE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="pfeFACTURAS" Relationship="Self.FK_pfeFACTURASDET_pfeFACTURAS" FromRole="pfeFACTURASDET" ToRole="pfeFACTURAS" />
+        </EntityType>
+        <EntityType Name="pfeFILIALES">
+          <Key>
+            <PropertyRef Name="IDEMPRESA" />
+            <PropertyRef Name="IDFILIAL" />
+          </Key>
+          <Property Name="IDEMPRESA" Type="Decimal" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="IDFILIAL" Type="Decimal" Precision="2" Scale="0" Nullable="false" />
+          <Property Name="RAZONSOCIAL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RFC" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EMAILREVISION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EMAILPAGOS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EMAILCONTACTO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TELEFONO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IDUSUARIO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="pfeEMPRESA" Relationship="Self.FK_pfeFILIALES_pfeEMPRESA" FromRole="pfeFILIALES" ToRole="pfeEMPRESA" />
+          <NavigationProperty Name="pfeFACTURAS" Relationship="Self.FK_pfeFACTURAS_pfeFILIAL" FromRole="pfeFILIALES" ToRole="pfeFACTURAS" />
+          <NavigationProperty Name="pfeUSUARIOS" Relationship="Self.FK_pfeFILIALES_pfeUSUARIO" FromRole="pfeFILIALES" ToRole="pfeUSUARIOS" />
+          <NavigationProperty Name="pfeORDENCOMPRA" Relationship="Self.FK_pfeORDENCOMPRA_pfeFILIAL" FromRole="pfeFILIALES" ToRole="pfeORDENCOMPRA" />
+        </EntityType>
+        <EntityType Name="pfeORDENCOMPRA">
+          <Key>
+            <PropertyRef Name="IDEMPRESA" />
+            <PropertyRef Name="IDFILIAL" />
+            <PropertyRef Name="IDPROVEEDOR" />
+            <PropertyRef Name="IDFOLIOOC" />
+          </Key>
+          <Property Name="IDEMPRESA" Type="Decimal" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="IDFILIAL" Type="Decimal" Precision="2" Scale="0" Nullable="false" />
+          <Property Name="IDPROVEEDOR" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IDFOLIOOC" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FECHAOC" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="OBRA" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="COSTO" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="MONEDA" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ESTATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="COMENTARIO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IDUSUARIO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="pfeEMPRESA" Relationship="Self.FK_pfeORDENCOMPRA_pfeEMPRESA" FromRole="pfeORDENCOMPRA" ToRole="pfeEMPRESA" />
+          <NavigationProperty Name="pfeFACTURAS" Relationship="Self.FK_pfeFACTURAS_pfeORDENCOMPRA" FromRole="pfeORDENCOMPRA" ToRole="pfeFACTURAS" />
+          <NavigationProperty Name="pfeFILIALES" Relationship="Self.FK_pfeORDENCOMPRA_pfeFILIAL" FromRole="pfeORDENCOMPRA" ToRole="pfeFILIALES" />
+          <NavigationProperty Name="pfePROVEEDORES" Relationship="Self.FK_pfeORDENCOMPRA_pfePROVEEDOR" FromRole="pfeORDENCOMPRA" ToRole="pfePROVEEDORES" />
+          <NavigationProperty Name="pfeUSUARIOS" Relationship="Self.FK_pfeORDENCOMPRA_pfeUSUARIO" FromRole="pfeORDENCOMPRA" ToRole="pfeUSUARIOS" />
+        </EntityType>
+        <EntityType Name="pfePARAMETROS">
+          <Key>
+            <PropertyRef Name="IDPARAMETRO" />
+          </Key>
+          <Property Name="IDPARAMETRO" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VALOR" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="pfePROVEEDORES">
+          <Key>
+            <PropertyRef Name="IDEMPRESA" />
+            <PropertyRef Name="IDPROVEEDOR" />
+          </Key>
+          <Property Name="IDEMPRESA" Type="Decimal" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="IDPROVEEDOR" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RAZONSOCIAL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TIPOPROV" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="CURP" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RFC" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TIPOPAGO" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="DIASCREDITO" Type="Decimal" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="TIPOFACTURA" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="TIPOVENCE" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="CLAVEPROV" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CLAVEPROD" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NOMCONTACTO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="APPCONTACTO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="APMCONTACTO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EMAILPROV" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TELEFONO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IDUSUARIO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IDMODIFICA" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ESTATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="pfeEMPRESA" Relationship="Self.FK_pfePROVEEDORES_pfeEMPRESA" FromRole="pfePROVEEDORES" ToRole="pfeEMPRESA" />
+          <NavigationProperty Name="pfeFACTURAS" Relationship="Self.FK_pfeFACTURAS_pfePROVEEDOR" FromRole="pfePROVEEDORES" ToRole="pfeFACTURAS" />
+          <NavigationProperty Name="pfeORDENCOMPRA" Relationship="Self.FK_pfeORDENCOMPRA_pfePROVEEDOR" FromRole="pfePROVEEDORES" ToRole="pfeORDENCOMPRA" />
+          <NavigationProperty Name="pfeUSUARIOS" Relationship="Self.FK_pfePROVEEDORES_pfeUSUARIO" FromRole="pfePROVEEDORES" ToRole="pfeUSUARIOS" />
+        </EntityType>
+        <EntityType Name="pfeUSUARIOS">
+          <Key>
+            <PropertyRef Name="IDEMPRESA" />
+            <PropertyRef Name="IDUSUARIO" />
+          </Key>
+          <Property Name="IDEMPRESA" Type="Decimal" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="IDUSUARIO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PASSW" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOMUSUARIO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ROL" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ESTATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="pfeEMPRESA" Relationship="Self.FK_pfeUSUARIOS_pfeEMPRESA" FromRole="pfeUSUARIOS" ToRole="pfeEMPRESA" />
+          <NavigationProperty Name="pfeFILIALES" Relationship="Self.FK_pfeFILIALES_pfeUSUARIO" FromRole="pfeUSUARIOS" ToRole="pfeFILIALES" />
+          <NavigationProperty Name="pfeORDENCOMPRA" Relationship="Self.FK_pfeORDENCOMPRA_pfeUSUARIO" FromRole="pfeUSUARIOS" ToRole="pfeORDENCOMPRA" />
+          <NavigationProperty Name="pfePROVEEDORES" Relationship="Self.FK_pfePROVEEDORES_pfeUSUARIO" FromRole="pfeUSUARIOS" ToRole="pfePROVEEDORES" />
+        </EntityType>
+        <Association Name="FK_pfeFACTURAS_pfeEMPRESA">
+          <End Role="pfeEMPRESA" Type="Self.pfeEMPRESA" Multiplicity="1" />
+          <End Role="pfeFACTURAS" Type="Self.pfeFACTURAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pfeEMPRESA">
+              <PropertyRef Name="IDEMPRESA" />
+            </Principal>
+            <Dependent Role="pfeFACTURAS">
+              <PropertyRef Name="IDEMPRESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pfeFILIALES_pfeEMPRESA">
+          <End Role="pfeEMPRESA" Type="Self.pfeEMPRESA" Multiplicity="1" />
+          <End Role="pfeFILIALES" Type="Self.pfeFILIALES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pfeEMPRESA">
+              <PropertyRef Name="IDEMPRESA" />
+            </Principal>
+            <Dependent Role="pfeFILIALES">
+              <PropertyRef Name="IDEMPRESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pfeORDENCOMPRA_pfeEMPRESA">
+          <End Role="pfeEMPRESA" Type="Self.pfeEMPRESA" Multiplicity="1" />
+          <End Role="pfeORDENCOMPRA" Type="Self.pfeORDENCOMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pfeEMPRESA">
+              <PropertyRef Name="IDEMPRESA" />
+            </Principal>
+            <Dependent Role="pfeORDENCOMPRA">
+              <PropertyRef Name="IDEMPRESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pfePROVEEDORES_pfeEMPRESA">
+          <End Role="pfeEMPRESA" Type="Self.pfeEMPRESA" Multiplicity="1" />
+          <End Role="pfePROVEEDORES" Type="Self.pfePROVEEDORES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pfeEMPRESA">
+              <PropertyRef Name="IDEMPRESA" />
+            </Principal>
+            <Dependent Role="pfePROVEEDORES">
+              <PropertyRef Name="IDEMPRESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pfeUSUARIOS_pfeEMPRESA">
+          <End Role="pfeEMPRESA" Type="Self.pfeEMPRESA" Multiplicity="1" />
+          <End Role="pfeUSUARIOS" Type="Self.pfeUSUARIOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pfeEMPRESA">
+              <PropertyRef Name="IDEMPRESA" />
+            </Principal>
+            <Dependent Role="pfeUSUARIOS">
+              <PropertyRef Name="IDEMPRESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pfeFACTURAS_pfeFILIAL">
+          <End Role="pfeFILIALES" Type="Self.pfeFILIALES" Multiplicity="1" />
+          <End Role="pfeFACTURAS" Type="Self.pfeFACTURAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pfeFILIALES">
+              <PropertyRef Name="IDEMPRESA" />
+              <PropertyRef Name="IDFILIAL" />
+            </Principal>
+            <Dependent Role="pfeFACTURAS">
+              <PropertyRef Name="IDEMPRESA" />
+              <PropertyRef Name="IDFILIAL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pfeFACTURAS_pfeORDENCOMPRA">
+          <End Role="pfeORDENCOMPRA" Type="Self.pfeORDENCOMPRA" Multiplicity="1" />
+          <End Role="pfeFACTURAS" Type="Self.pfeFACTURAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pfeORDENCOMPRA">
+              <PropertyRef Name="IDEMPRESA" />
+              <PropertyRef Name="IDFILIAL" />
+              <PropertyRef Name="IDPROVEEDOR" />
+              <PropertyRef Name="IDFOLIOOC" />
+            </Principal>
+            <Dependent Role="pfeFACTURAS">
+              <PropertyRef Name="IDEMPRESA" />
+              <PropertyRef Name="IDFILIAL" />
+              <PropertyRef Name="IDPROVEEDOR" />
+              <PropertyRef Name="IDFOLIOOC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pfeFACTURAS_pfePROVEEDOR">
+          <End Role="pfePROVEEDORES" Type="Self.pfePROVEEDORES" Multiplicity="1" />
+          <End Role="pfeFACTURAS" Type="Self.pfeFACTURAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pfePROVEEDORES">
+              <PropertyRef Name="IDEMPRESA" />
+              <PropertyRef Name="IDPROVEEDOR" />
+            </Principal>
+            <Dependent Role="pfeFACTURAS">
+              <PropertyRef Name="IDEMPRESA" />
+              <PropertyRef Name="IDPROVEEDOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pfeFACTURASDET_pfeFACTURAS">
+          <End Role="pfeFACTURAS" Type="Self.pfeFACTURAS" Multiplicity="1" />
+          <End Role="pfeFACTURASDET" Type="Self.pfeFACTURASDET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pfeFACTURAS">
+              <PropertyRef Name="IDEMPRESA" />
+              <PropertyRef Name="IDFACTURA" />
+            </Principal>
+            <Dependent Role="pfeFACTURASDET">
+              <PropertyRef Name="IDEMPRESA" />
+              <PropertyRef Name="IDFACTURA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pfeFILIALES_pfeUSUARIO">
+          <End Role="pfeUSUARIOS" Type="Self.pfeUSUARIOS" Multiplicity="1" />
+          <End Role="pfeFILIALES" Type="Self.pfeFILIALES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pfeUSUARIOS">
+              <PropertyRef Name="IDEMPRESA" />
+              <PropertyRef Name="IDUSUARIO" />
+            </Principal>
+            <Dependent Role="pfeFILIALES">
+              <PropertyRef Name="IDEMPRESA" />
+              <PropertyRef Name="IDUSUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pfeORDENCOMPRA_pfeFILIAL">
+          <End Role="pfeFILIALES" Type="Self.pfeFILIALES" Multiplicity="1" />
+          <End Role="pfeORDENCOMPRA" Type="Self.pfeORDENCOMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pfeFILIALES">
+              <PropertyRef Name="IDEMPRESA" />
+              <PropertyRef Name="IDFILIAL" />
+            </Principal>
+            <Dependent Role="pfeORDENCOMPRA">
+              <PropertyRef Name="IDEMPRESA" />
+              <PropertyRef Name="IDFILIAL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pfeORDENCOMPRA_pfePROVEEDOR">
+          <End Role="pfePROVEEDORES" Type="Self.pfePROVEEDORES" Multiplicity="1" />
+          <End Role="pfeORDENCOMPRA" Type="Self.pfeORDENCOMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pfePROVEEDORES">
+              <PropertyRef Name="IDEMPRESA" />
+              <PropertyRef Name="IDPROVEEDOR" />
+            </Principal>
+            <Dependent Role="pfeORDENCOMPRA">
+              <PropertyRef Name="IDEMPRESA" />
+              <PropertyRef Name="IDPROVEEDOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pfeORDENCOMPRA_pfeUSUARIO">
+          <End Role="pfeUSUARIOS" Type="Self.pfeUSUARIOS" Multiplicity="1" />
+          <End Role="pfeORDENCOMPRA" Type="Self.pfeORDENCOMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pfeUSUARIOS">
+              <PropertyRef Name="IDEMPRESA" />
+              <PropertyRef Name="IDUSUARIO" />
+            </Principal>
+            <Dependent Role="pfeORDENCOMPRA">
+              <PropertyRef Name="IDEMPRESA" />
+              <PropertyRef Name="IDUSUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pfePROVEEDORES_pfeUSUARIO">
+          <End Role="pfeUSUARIOS" Type="Self.pfeUSUARIOS" Multiplicity="1" />
+          <End Role="pfePROVEEDORES" Type="Self.pfePROVEEDORES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pfeUSUARIOS">
+              <PropertyRef Name="IDEMPRESA" />
+              <PropertyRef Name="IDUSUARIO" />
+            </Principal>
+            <Dependent Role="pfePROVEEDORES">
+              <PropertyRef Name="IDEMPRESA" />
+              <PropertyRef Name="IDMODIFICA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbQuantusEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="pfeEMPRESA" EntityType="Self.pfeEMPRESA" />
+          <EntitySet Name="pfeFACTURAS" EntityType="Self.pfeFACTURAS" />
+          <EntitySet Name="pfeFACTURASDET" EntityType="Self.pfeFACTURASDET" />
+          <EntitySet Name="pfeFILIALES" EntityType="Self.pfeFILIALES" />
+          <EntitySet Name="pfeORDENCOMPRA" EntityType="Self.pfeORDENCOMPRA" />
+          <EntitySet Name="pfePARAMETROS" EntityType="Self.pfePARAMETROS" />
+          <EntitySet Name="pfePROVEEDORES" EntityType="Self.pfePROVEEDORES" />
+          <EntitySet Name="pfeUSUARIOS" EntityType="Self.pfeUSUARIOS" />
+          <AssociationSet Name="FK_pfeFACTURAS_pfeEMPRESA" Association="Self.FK_pfeFACTURAS_pfeEMPRESA">
+            <End Role="pfeEMPRESA" EntitySet="pfeEMPRESA" />
+            <End Role="pfeFACTURAS" EntitySet="pfeFACTURAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pfeFILIALES_pfeEMPRESA" Association="Self.FK_pfeFILIALES_pfeEMPRESA">
+            <End Role="pfeEMPRESA" EntitySet="pfeEMPRESA" />
+            <End Role="pfeFILIALES" EntitySet="pfeFILIALES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pfeORDENCOMPRA_pfeEMPRESA" Association="Self.FK_pfeORDENCOMPRA_pfeEMPRESA">
+            <End Role="pfeEMPRESA" EntitySet="pfeEMPRESA" />
+            <End Role="pfeORDENCOMPRA" EntitySet="pfeORDENCOMPRA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pfePROVEEDORES_pfeEMPRESA" Association="Self.FK_pfePROVEEDORES_pfeEMPRESA">
+            <End Role="pfeEMPRESA" EntitySet="pfeEMPRESA" />
+            <End Role="pfePROVEEDORES" EntitySet="pfePROVEEDORES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pfeUSUARIOS_pfeEMPRESA" Association="Self.FK_pfeUSUARIOS_pfeEMPRESA">
+            <End Role="pfeEMPRESA" EntitySet="pfeEMPRESA" />
+            <End Role="pfeUSUARIOS" EntitySet="pfeUSUARIOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pfeFACTURAS_pfeFILIAL" Association="Self.FK_pfeFACTURAS_pfeFILIAL">
+            <End Role="pfeFILIALES" EntitySet="pfeFILIALES" />
+            <End Role="pfeFACTURAS" EntitySet="pfeFACTURAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pfeFACTURAS_pfeORDENCOMPRA" Association="Self.FK_pfeFACTURAS_pfeORDENCOMPRA">
+            <End Role="pfeORDENCOMPRA" EntitySet="pfeORDENCOMPRA" />
+            <End Role="pfeFACTURAS" EntitySet="pfeFACTURAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pfeFACTURAS_pfePROVEEDOR" Association="Self.FK_pfeFACTURAS_pfePROVEEDOR">
+            <End Role="pfePROVEEDORES" EntitySet="pfePROVEEDORES" />
+            <End Role="pfeFACTURAS" EntitySet="pfeFACTURAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pfeFACTURASDET_pfeFACTURAS" Association="Self.FK_pfeFACTURASDET_pfeFACTURAS">
+            <End Role="pfeFACTURAS" EntitySet="pfeFACTURAS" />
+            <End Role="pfeFACTURASDET" EntitySet="pfeFACTURASDET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pfeFILIALES_pfeUSUARIO" Association="Self.FK_pfeFILIALES_pfeUSUARIO">
+            <End Role="pfeUSUARIOS" EntitySet="pfeUSUARIOS" />
+            <End Role="pfeFILIALES" EntitySet="pfeFILIALES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pfeORDENCOMPRA_pfeFILIAL" Association="Self.FK_pfeORDENCOMPRA_pfeFILIAL">
+            <End Role="pfeFILIALES" EntitySet="pfeFILIALES" />
+            <End Role="pfeORDENCOMPRA" EntitySet="pfeORDENCOMPRA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pfeORDENCOMPRA_pfePROVEEDOR" Association="Self.FK_pfeORDENCOMPRA_pfePROVEEDOR">
+            <End Role="pfePROVEEDORES" EntitySet="pfePROVEEDORES" />
+            <End Role="pfeORDENCOMPRA" EntitySet="pfeORDENCOMPRA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pfeORDENCOMPRA_pfeUSUARIO" Association="Self.FK_pfeORDENCOMPRA_pfeUSUARIO">
+            <End Role="pfeUSUARIOS" EntitySet="pfeUSUARIOS" />
+            <End Role="pfeORDENCOMPRA" EntitySet="pfeORDENCOMPRA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pfePROVEEDORES_pfeUSUARIO" Association="Self.FK_pfePROVEEDORES_pfeUSUARIO">
+            <End Role="pfeUSUARIOS" EntitySet="pfeUSUARIOS" />
+            <End Role="pfePROVEEDORES" EntitySet="pfePROVEEDORES" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbQuantusModelStoreContainer" CdmEntityContainer="dbQuantusEntities">
+          <EntitySetMapping Name="pfeEMPRESA">
+            <EntityTypeMapping TypeName="dbQuantusModel.pfeEMPRESA">
+              <MappingFragment StoreEntitySet="pfeEMPRESA">
+                <ScalarProperty Name="RFC" ColumnName="RFC" />
+                <ScalarProperty Name="IDEMPRESA" ColumnName="IDEMPRESA" />
+                <ScalarProperty Name="RAZONSOCIAL" ColumnName="RAZONSOCIAL" />
+                <ScalarProperty Name="NOMCONTACTO" ColumnName="NOMCONTACTO" />
+                <ScalarProperty Name="EMAILCONTACTO" ColumnName="EMAILCONTACTO" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="ESTATUS" ColumnName="ESTATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pfeFACTURAS">
+            <EntityTypeMapping TypeName="dbQuantusModel.pfeFACTURAS">
+              <MappingFragment StoreEntitySet="pfeFACTURAS">
+                <ScalarProperty Name="IDFACTURA" ColumnName="IDFACTURA" />
+                <ScalarProperty Name="IDEMPRESA" ColumnName="IDEMPRESA" />
+                <ScalarProperty Name="IDFILIAL" ColumnName="IDFILIAL" />
+                <ScalarProperty Name="IDPROVEEDOR" ColumnName="IDPROVEEDOR" />
+                <ScalarProperty Name="IDFOLIOOC" ColumnName="IDFOLIOOC" />
+                <ScalarProperty Name="XMLTXT" ColumnName="XMLTXT" />
+                <ScalarProperty Name="XMLOBJ" ColumnName="XMLOBJ" />
+                <ScalarProperty Name="XMLFILENAME" ColumnName="XMLFILENAME" />
+                <ScalarProperty Name="PDFOBJ" ColumnName="PDFOBJ" />
+                <ScalarProperty Name="PDFFILENAME" ColumnName="PDFFILENAME" />
+                <ScalarProperty Name="SERIE" ColumnName="SERIE" />
+                <ScalarProperty Name="FOLIO" ColumnName="FOLIO" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+                <ScalarProperty Name="MONEDA" ColumnName="MONEDA" />
+                <ScalarProperty Name="UUID" ColumnName="UUID" />
+                <ScalarProperty Name="ESTATUS" ColumnName="ESTATUS" />
+                <ScalarProperty Name="COMENTARIO" ColumnName="COMENTARIO" />
+                <ScalarProperty Name="IMGOBJ" ColumnName="IMGOBJ" />
+                <ScalarProperty Name="IMGFILENAME" ColumnName="IMGFILENAME" />
+                <ScalarProperty Name="TIPOCOMPROBANTE" ColumnName="TIPOCOMPROBANTE" />
+                <ScalarProperty Name="FECHAINGRESOXML" ColumnName="FECHAINGRESOXML" />
+                <ScalarProperty Name="FECHAINGRESOPDF" ColumnName="FECHAINGRESOPDF" />
+                <ScalarProperty Name="FECHAINGRESOIMG" ColumnName="FECHAINGRESOIMG" />
+                <ScalarProperty Name="FECHAESTATUS" ColumnName="FECHAESTATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pfeFACTURASDET">
+            <EntityTypeMapping TypeName="dbQuantusModel.pfeFACTURASDET">
+              <MappingFragment StoreEntitySet="pfeFACTURASDET">
+                <ScalarProperty Name="IDFACTURADET" ColumnName="IDFACTURADET" />
+                <ScalarProperty Name="IDFACTURA" ColumnName="IDFACTURA" />
+                <ScalarProperty Name="IDEMPRESA" ColumnName="IDEMPRESA" />
+                <ScalarProperty Name="CLAVEUNIDAD" ColumnName="CLAVEUNIDAD" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+                <ScalarProperty Name="VALORUNITARIO" ColumnName="VALORUNITARIO" />
+                <ScalarProperty Name="IMPORTE" ColumnName="IMPORTE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pfeFILIALES">
+            <EntityTypeMapping TypeName="dbQuantusModel.pfeFILIALES">
+              <MappingFragment StoreEntitySet="pfeFILIALES">
+                <ScalarProperty Name="IDEMPRESA" ColumnName="IDEMPRESA" />
+                <ScalarProperty Name="IDFILIAL" ColumnName="IDFILIAL" />
+                <ScalarProperty Name="RAZONSOCIAL" ColumnName="RAZONSOCIAL" />
+                <ScalarProperty Name="RFC" ColumnName="RFC" />
+                <ScalarProperty Name="EMAILREVISION" ColumnName="EMAILREVISION" />
+                <ScalarProperty Name="EMAILPAGOS" ColumnName="EMAILPAGOS" />
+                <ScalarProperty Name="EMAILCONTACTO" ColumnName="EMAILCONTACTO" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pfeORDENCOMPRA">
+            <EntityTypeMapping TypeName="dbQuantusModel.pfeORDENCOMPRA">
+              <MappingFragment StoreEntitySet="pfeORDENCOMPRA">
+                <ScalarProperty Name="IDEMPRESA" ColumnName="IDEMPRESA" />
+                <ScalarProperty Name="IDFILIAL" ColumnName="IDFILIAL" />
+                <ScalarProperty Name="IDPROVEEDOR" ColumnName="IDPROVEEDOR" />
+                <ScalarProperty Name="IDFOLIOOC" ColumnName="IDFOLIOOC" />
+                <ScalarProperty Name="FECHAOC" ColumnName="FECHAOC" />
+                <ScalarProperty Name="OBRA" ColumnName="OBRA" />
+                <ScalarProperty Name="COSTO" ColumnName="COSTO" />
+                <ScalarProperty Name="MONEDA" ColumnName="MONEDA" />
+                <ScalarProperty Name="ESTATUS" ColumnName="ESTATUS" />
+                <ScalarProperty Name="COMENTARIO" ColumnName="COMENTARIO" />
+                <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pfePARAMETROS">
+            <EntityTypeMapping TypeName="dbQuantusModel.pfePARAMETROS">
+              <MappingFragment StoreEntitySet="pfePARAMETROS">
+                <ScalarProperty Name="IDPARAMETRO" ColumnName="IDPARAMETRO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="VALOR" ColumnName="VALOR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pfePROVEEDORES">
+            <EntityTypeMapping TypeName="dbQuantusModel.pfePROVEEDORES">
+              <MappingFragment StoreEntitySet="pfePROVEEDORES">
+                <ScalarProperty Name="IDEMPRESA" ColumnName="IDEMPRESA" />
+                <ScalarProperty Name="IDPROVEEDOR" ColumnName="IDPROVEEDOR" />
+                <ScalarProperty Name="RAZONSOCIAL" ColumnName="RAZONSOCIAL" />
+                <ScalarProperty Name="TIPOPROV" ColumnName="TIPOPROV" />
+                <ScalarProperty Name="CURP" ColumnName="CURP" />
+                <ScalarProperty Name="RFC" ColumnName="RFC" />
+                <ScalarProperty Name="TIPOPAGO" ColumnName="TIPOPAGO" />
+                <ScalarProperty Name="DIASCREDITO" ColumnName="DIASCREDITO" />
+                <ScalarProperty Name="TIPOFACTURA" ColumnName="TIPOFACTURA" />
+                <ScalarProperty Name="TIPOVENCE" ColumnName="TIPOVENCE" />
+                <ScalarProperty Name="CLAVEPROV" ColumnName="CLAVEPROV" />
+                <ScalarProperty Name="CLAVEPROD" ColumnName="CLAVEPROD" />
+                <ScalarProperty Name="NOMCONTACTO" ColumnName="NOMCONTACTO" />
+                <ScalarProperty Name="APPCONTACTO" ColumnName="APPCONTACTO" />
+                <ScalarProperty Name="APMCONTACTO" ColumnName="APMCONTACTO" />
+                <ScalarProperty Name="EMAILPROV" ColumnName="EMAILPROV" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
+                <ScalarProperty Name="IDMODIFICA" ColumnName="IDMODIFICA" />
+                <ScalarProperty Name="ESTATUS" ColumnName="ESTATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pfeUSUARIOS">
+            <EntityTypeMapping TypeName="dbQuantusModel.pfeUSUARIOS">
+              <MappingFragment StoreEntitySet="pfeUSUARIOS">
+                <ScalarProperty Name="IDEMPRESA" ColumnName="IDEMPRESA" />
+                <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
+                <ScalarProperty Name="PASSW" ColumnName="PASSW" />
+                <ScalarProperty Name="NOMUSUARIO" ColumnName="NOMUSUARIO" />
+                <ScalarProperty Name="ROL" ColumnName="ROL" />
+                <ScalarProperty Name="ESTATUS" ColumnName="ESTATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
